@@ -188,7 +188,8 @@ public class HttpAPIService {
         // 设置请求体
         httpPost.setEntity(new StringEntity(body));
         //httpPost.setEntity(new StringEntity(body,"UTF-8"));
-        httpPost.setHeader("Content-Type", "application/json;charset=utf8");
+        httpPost.setHeader("Content-Type", "application/json");
+        httpPost.setHeader("charset","utf8");
 
         //获取request URL
         System.out.println("request URL：");

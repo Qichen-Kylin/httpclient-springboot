@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.zdww.SpringBootHttpClient.DataModel.model.*;
 import com.zdww.SpringBootHttpClient.HttpClient.HttpAPIService;
 import com.zdww.SpringBootHttpClient.HttpClient.HttpResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import com.zdww.SpringBootHttpClient.DataModel.ApiException;
 
 import javax.annotation.Resource;
 import java.util.Map;
@@ -34,23 +34,6 @@ public class Store {
         return httpResult.getBody();
     }
 
-//    @RequestMapping("/get/v1/pipeline/pipelineId/rules")
-//    //按名称和修订查找管道规则
-//    public String GetPipelineIdRules(@RequestBody ParametersTypePath parametersTypePath,@RequestParam Map<String, Object> map) throws Exception {
-////        String pipelineId = "HttpClient_TESTAPI";
-////        String rev = "";
-////        Map<String, Object> map = new HashMap<String, Object>();
-////        map.put("rev", rev);
-//        String pipelineId = parametersTypePath.getPipelineId();
-//        System.out.println(pipelineId);
-//        String url = Schema_Host_Port_Path + "/v1/pipeline/" + pipelineId + "/rules";
-//
-//        HttpResult httpResult = httpAPIService.doGet(url, map);
-//        System.out.println(httpResult.getCode());
-//        System.out.println(httpResult.getBody());
-//        return httpResult.getBody();
-//    }
-
     @RequestMapping("/get/v1/pipeline/{pipelineId}/rules")
     //按名称和修订查找管道规则
     public String GetPipelineIdRules(@PathVariable("pipelineId") String pipelineId, @RequestParam Map<String, Object> map) throws Exception {
@@ -64,7 +47,7 @@ public class Store {
     }
 
     @RequestMapping("/post/v1/pipeline/{pipelineId}/rules")
-    //按名称和修订查找管道规则
+    //
     public String PostPipelineIdRules(@PathVariable("pipelineId") String pipelineId,@RequestParam Map<String, Object> map,@RequestBody RuleDefinitionsJson ruleDefinitionsJson) throws Exception {
         System.out.println(pipelineId);
         String url = Schema_Host_Port_Path + "/v1/pipeline/" + pipelineId + "/rules";
@@ -99,19 +82,9 @@ public class Store {
 
     @RequestMapping("/post/v1/pipeline/{pipelineId}")
     //通过名称更新现有管道配置
-    public String PostPipeline(@PathVariable("pipelineId") String pipelineId,@RequestParam Map<String, Object> map,@RequestBody PipelineConfigurationJson pipelineConfigurationJson ) throws Exception {
-        // verify the required parameter 'pipelineId' is set
-        if (pipelineId == null) {
-            throw new ApiException(400, "Missing the required parameter 'pipelineId' when calling savePipeline");
-        }
-
-        // verify the required parameter 'pipeline' is set
-        if (pipelineConfigurationJson == null) {
-            throw new ApiException(400, "Missing the required parameter 'pipeline' when calling savePipeline");
-        }
+    public String PostPipeline(@PathVariable("pipelineId") String pipelineId,@RequestParam Map<String, Object> map,@Validated @RequestBody PipelineConfigurationJson pipelineConfigurationJson ) throws Exception {
         String url = Schema_Host_Port_Path + "/v1/pipeline/"+ pipelineId;
-        Object postbody = pipelineConfigurationJson;
-        String body  = JSON.toJSONString(postbody);
+        String body  = JSON.toJSONString(pipelineConfigurationJson);
         System.out.println(body);
         HttpResult httpResult = httpAPIService.doPostParameterAndBody(url,body,map);
         System.out.println(httpResult.getCode());
