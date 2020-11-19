@@ -1,4 +1,4 @@
-package com.zdww.SpringBootHttpClient.DataModel;
+package com.zdww.SpringBootHttpClient.DataModel.PostUsers;
 
 
 import java.util.List;

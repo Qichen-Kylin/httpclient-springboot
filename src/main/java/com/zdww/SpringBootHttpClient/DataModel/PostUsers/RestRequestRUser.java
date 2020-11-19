@@ -1,4 +1,4 @@
-package com.zdww.SpringBootHttpClient.DataModel;
+package com.zdww.SpringBootHttpClient.DataModel.PostUsers;
 
 public class RestRequestRUser {
     //定义私有属性

@@ -47,7 +47,7 @@ public class Store {
     }
 
     @RequestMapping("/post/v1/pipeline/{pipelineId}/rules")
-    //
+    //通过名称更新现有的管道规则
     public String PostPipelineIdRules(@PathVariable("pipelineId") String pipelineId,@RequestParam Map<String, Object> map,@RequestBody RuleDefinitionsJson ruleDefinitionsJson) throws Exception {
         System.out.println(pipelineId);
         String url = Schema_Host_Port_Path + "/v1/pipeline/" + pipelineId + "/rules";
@@ -71,7 +71,7 @@ public class Store {
     }
 
     @RequestMapping("/get/v1/pipeline/{pipelineId}")
-    //按名称和修订查找管道规则
+    //通过名称和修订版查找管道配置
     public String GetPipelineId(@PathVariable("pipelineId") String pipelineId,@RequestParam Map<String, Object> map) throws Exception {
         String url = Schema_Host_Port_Path + "/v1/pipeline/" + pipelineId;
         HttpResult httpResult = httpAPIService.doGet(url, map);
@@ -82,7 +82,7 @@ public class Store {
 
     @RequestMapping("/post/v1/pipeline/{pipelineId}")
     //通过名称更新现有管道配置
-    public String PostPipeline(@PathVariable("pipelineId") String pipelineId,@RequestParam Map<String, Object> map,@Validated @RequestBody PipelineConfigurationJson pipelineConfigurationJson ) throws Exception {
+    public String PostPipelineId(@PathVariable("pipelineId") String pipelineId,@RequestParam Map<String, Object> map,@Validated @RequestBody PipelineConfigurationJson pipelineConfigurationJson ) throws Exception {
         String url = Schema_Host_Port_Path + "/v1/pipeline/"+ pipelineId;
         String body  = JSON.toJSONString(pipelineConfigurationJson);
         System.out.println(body);
