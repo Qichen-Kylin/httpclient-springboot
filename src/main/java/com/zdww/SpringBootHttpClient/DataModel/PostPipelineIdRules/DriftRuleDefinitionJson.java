@@ -1,4 +1,4 @@
-package com.zdww.SpringBootHttpClient.DataModel;
+package com.zdww.SpringBootHttpClient.DataModel.PostPipelineIdRules;
 
 public class DriftRuleDefinitionJson {
     private String id;

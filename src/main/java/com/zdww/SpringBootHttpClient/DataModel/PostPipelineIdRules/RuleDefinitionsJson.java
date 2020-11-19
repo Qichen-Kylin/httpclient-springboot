@@ -1,4 +1,4 @@
-package com.zdww.SpringBootHttpClient.DataModel;
+package com.zdww.SpringBootHttpClient.DataModel.PostPipelineIdRules;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ public class RuleDefinitionsJson {
     //定义私有属性
     private Integer schemaVersion;
     private Integer version;
-    private List<MetricsRuleDefinitionJson> metricsRuleDefinitions;
+    private List metricsRuleDefinitions;
     private List<DataRuleDefinitionJson> dataRuleDefinitions;
     private List<DriftRuleDefinitionJson> driftRuleDefinitions;
     private String uuid;
