@@ -1,11 +1,13 @@
 package com.zdww.SpringBootHttpClient.APIController;
 
+import com.alibaba.fastjson.JSON;
+import com.zdww.SpringBootHttpClient.DataModel.RestRequestRUser;
 import com.zdww.SpringBootHttpClient.HttpClient.HttpAPIService;
 import com.zdww.SpringBootHttpClient.HttpClient.HttpResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -18,14 +20,11 @@ public class UserManagement {
 
     @Resource
     private HttpAPIService httpAPIService;
+    private static final String Schema_Host_Port_Path = "http://worker3:18630/rest";
 
-    private static final String appKey = "";
-
-    //@PostMapping("/v1/usermanagement/users/{id}/resetPassword")
     @RequestMapping("/post/v1/usermanagement/users/{id}/resetPassword")
-    public String PostUserResetPassword() throws Exception {
-        String url = "http://worker3:18630/rest/v1/usermanagement/users/{id}/resetPassword";
-        Map<String, Object> map = new HashMap<String, Object>();
+    public String PostResetPassword(@PathVariable("id") String id,@RequestParam Map<String, Object> map) throws Exception {
+        String url = Schema_Host_Port_Path + "/v1/usermanagement/users/" + id + "/resetPassword";
         HttpResult httpResult = httpAPIService.doPost(url,map);
         System.out.println(httpResult.getCode());
         System.out.println(httpResult.getBody());
@@ -33,9 +32,8 @@ public class UserManagement {
     }
 
     @RequestMapping("/post/v1/usermanagement/users/{id}/changePassword")
-    public String PostUserChangePassword() throws Exception {
-        String url = "http://worker3:18630/rest/v1/usermanagement/users/{id}/changePassword";
-        Map<String, Object> map = new HashMap<String, Object>();
+    public String PostChangePassword(@PathVariable("id") String id,@RequestParam Map<String, Object> map) throws Exception {
+        String url = Schema_Host_Port_Path + "/v1/usermanagement/users/" + id + "/changePassword";
         HttpResult httpResult = httpAPIService.doPost(url,map);
         System.out.println(httpResult.getCode());
         System.out.println(httpResult.getBody());
@@ -43,19 +41,18 @@ public class UserManagement {
     }
 
     @RequestMapping("/post/v1/usermanagement/users/{id}")
-    public String PostUser() throws Exception {
-        String url = "http://worker3:18630/rest/v1/usermanagement/users/{id}";
-        Map<String, Object> map = new HashMap<String, Object>();
-        HttpResult httpResult = httpAPIService.doPost(url,map);
+    public String PostUser(@PathVariable("id") String id, @Validated @RequestBody RestRequestRUser restRequestRUserJson) throws Exception {
+        String url = Schema_Host_Port_Path + "/v1/usermanagement/users/" + id;
+        String body  = JSON.toJSONString(restRequestRUserJson);
+        HttpResult httpResult = httpAPIService.doPostbody(url,body);
         System.out.println(httpResult.getCode());
         System.out.println(httpResult.getBody());
         return httpResult.getBody();
     }
 
     @RequestMapping("/delete/v1/usermanagement/users/{id}")
-    public String DeleteUser() throws Exception {
-        String url = "http://worker3:18630/rest/v1/usermanagement/users/{id}";
-        Map<String, Object> map = new HashMap<String, Object>();
+    public String DeleteUser(@PathVariable("id") String id,@RequestParam Map<String, Object> map) throws Exception {
+        String url = Schema_Host_Port_Path + "/v1/usermanagement/users/" + id;
         HttpResult httpResult = httpAPIService.doDelete(url,map);
         System.out.println(httpResult.getCode());
         System.out.println(httpResult.getBody());
@@ -63,12 +60,8 @@ public class UserManagement {
     }
 
     @RequestMapping("/get/v1/usermanagement/users")
-    @ResponseBody
-    //@RequestMapping(value = {"/get/v1/usermanagement/users"} , method = {RequestMethod.GET} , produces = "application/json;charset=UTF-8")
-    public String GetUsers() throws Exception {
-        String url = "http://worker3:18630/rest/v1/usermanagement/users";
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("AppKey", appKey);
+    public String GetUsers(@RequestParam Map<String, Object> map) throws Exception {
+        String url = Schema_Host_Port_Path + "v1/usermanagement/users";
         HttpResult httpResult = httpAPIService.doGet(url,map);
         System.out.println(httpResult.getCode());
         System.out.println(httpResult.getBody());
@@ -76,14 +69,12 @@ public class UserManagement {
     }
 
     @RequestMapping("/post/v1/usermanagement/users")
-    @ResponseBody
-    //@RequestMapping(value = {"/get/v1/usermanagement/users"} , method = {RequestMethod.POST} , produces = "application/json;charset=UTF-8")
-    public String PostUsers() throws Exception {
-        String url = "http://worker3:18630/rest/v1/usermanagement/users";
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("AppKey", appKey);
-
-        HttpResult httpResult = httpAPIService.doPost(url,map);
+    public String PostUsers(@RequestBody RestRequestRUser restRequestRUserJson) throws Exception {
+        String url = Schema_Host_Port_Path + "v1/usermanagement/users";
+        System.out.println(restRequestRUserJson);
+        String body  = JSON.toJSONString(restRequestRUserJson);
+        System.out.println(body);
+        HttpResult httpResult = httpAPIService.doPostbody(url,body);
         System.out.println(httpResult.getCode());
         System.out.println(httpResult.getBody());
         return httpResult.getBody();
