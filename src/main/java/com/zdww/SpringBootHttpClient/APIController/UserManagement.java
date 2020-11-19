@@ -61,7 +61,7 @@ public class UserManagement {
 
     @RequestMapping("/get/v1/usermanagement/users")
     public String GetUsers(@RequestParam Map<String, Object> map) throws Exception {
-        String url = Schema_Host_Port_Path + "v1/usermanagement/users";
+        String url = Schema_Host_Port_Path + "/v1/usermanagement/users";
         HttpResult httpResult = httpAPIService.doGet(url,map);
         System.out.println(httpResult.getCode());
         System.out.println(httpResult.getBody());
@@ -70,7 +70,7 @@ public class UserManagement {
 
     @RequestMapping("/post/v1/usermanagement/users")
     public String PostUsers(@RequestBody RestRequestRUser restRequestRUserJson) throws Exception {
-        String url = Schema_Host_Port_Path + "v1/usermanagement/users";
+        String url = Schema_Host_Port_Path + "/v1/usermanagement/users";
         System.out.println(restRequestRUserJson);
         String body  = JSON.toJSONString(restRequestRUserJson);
         System.out.println(body);

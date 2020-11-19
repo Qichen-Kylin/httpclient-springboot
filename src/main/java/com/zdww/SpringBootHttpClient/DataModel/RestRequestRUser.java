@@ -1,7 +1,5 @@
 package com.zdww.SpringBootHttpClient.DataModel;
 
-import java.util.ArrayList;
-
 public class RestRequestRUser {
     //定义私有属性
     private String envelopeVersion = null;
