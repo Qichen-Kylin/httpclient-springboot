@@ -13,6 +13,7 @@ public class PipelineConfigurationJson {
     private List<ConfigConfigurationJson> configuration = null;
     private Map<String, Object> uiInfo = null;
     private List<PipelineFragmentConfigurationJson> fragments = null;
+    //private List<String> fragments= null;
     private List<StageConfigurationJson> stages = null;
     private StageConfigurationJson errorStage = null;
     private PipelineInfoJson info = null;
@@ -81,12 +82,11 @@ public class PipelineConfigurationJson {
         this.uiInfo = uiInfo;
     }
 
-    public List<PipelineFragmentConfigurationJson> getFragments() {
-        return fragments;
-    }
-    public void setFragments(List<PipelineFragmentConfigurationJson> fragments) {
-        this.fragments = fragments;
-    }
+    public List<PipelineFragmentConfigurationJson> getFragments() { return fragments; }
+    public void setFragments(List<PipelineFragmentConfigurationJson> fragments) { this.fragments = fragments; }
+
+//    public List<String> getFragments() { return fragments; }
+//    public void setFragments(List<String> fragments) { this.fragments = fragments; }
 
     public List<StageConfigurationJson> getStages() {
         return stages;

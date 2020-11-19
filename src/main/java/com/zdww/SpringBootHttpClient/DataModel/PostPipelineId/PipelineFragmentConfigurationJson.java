@@ -128,18 +128,18 @@ public class PipelineFragmentConfigurationJson {
         this.metadata = metadata;
     }
 
-    public List<PipelineFragmentConfigurationJson> getFragments() {
-        return fragments;
-    }
-    public void setFragments(List<PipelineFragmentConfigurationJson> fragments) {
-        this.fragments = fragments;
-    }
-
     public StageConfigurationJson getTestOriginStage() {
         return testOriginStage;
     }
     public void setTestOriginStage(StageConfigurationJson testOriginStage) {
         this.testOriginStage = testOriginStage;
+    }
+
+    public List<PipelineFragmentConfigurationJson> getFragments() {
+        return fragments;
+    }
+    public void setFragments(List<PipelineFragmentConfigurationJson> fragments) {
+        this.fragments = fragments;
     }
 
 }

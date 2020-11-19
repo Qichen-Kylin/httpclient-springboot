@@ -1,10 +1,10 @@
 package com.zdww.SpringBootHttpClient.APIController;
 
 import com.alibaba.fastjson.JSON;
-import com.zdww.SpringBootHttpClient.DataModel.model.*;
+import com.zdww.SpringBootHttpClient.DataModel.PostPipelineId.PipelineConfigurationJson;
+import com.zdww.SpringBootHttpClient.DataModel.RuleDefinitionsJson;
 import com.zdww.SpringBootHttpClient.HttpClient.HttpAPIService;
 import com.zdww.SpringBootHttpClient.HttpClient.HttpResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -82,7 +82,7 @@ public class Store {
 
     @RequestMapping("/post/v1/pipeline/{pipelineId}")
     //通过名称更新现有管道配置
-    public String PostPipelineId(@PathVariable("pipelineId") String pipelineId,@RequestParam Map<String, Object> map,@Validated @RequestBody PipelineConfigurationJson pipelineConfigurationJson ) throws Exception {
+    public String PostPipelineId(@PathVariable("pipelineId") String pipelineId,@RequestParam Map<String, Object> map,@RequestBody PipelineConfigurationJson pipelineConfigurationJson ) throws Exception {
         String url = Schema_Host_Port_Path + "/v1/pipeline/"+ pipelineId;
         String body  = JSON.toJSONString(pipelineConfigurationJson);
         System.out.println(body);
