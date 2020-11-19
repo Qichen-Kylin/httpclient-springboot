@@ -2,7 +2,7 @@ package com.zdww.SpringBootHttpClient.APIController;
 
 import com.alibaba.fastjson.JSON;
 import com.zdww.SpringBootHttpClient.DataModel.PostPipelineId.PipelineConfigurationJson;
-import com.zdww.SpringBootHttpClient.DataModel.RuleDefinitionsJson;
+import com.zdww.SpringBootHttpClient.DataModel.PostPipelineIdRules.RuleDefinitionsJson;
 import com.zdww.SpringBootHttpClient.HttpClient.HttpAPIService;
 import com.zdww.SpringBootHttpClient.HttpClient.HttpResult;
 import org.springframework.web.bind.annotation.*;

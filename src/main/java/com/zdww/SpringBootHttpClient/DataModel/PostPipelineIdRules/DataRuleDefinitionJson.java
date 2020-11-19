@@ -1,4 +1,4 @@
-package com.zdww.SpringBootHttpClient.DataModel.PostPipelineIdRules.;
+package com.zdww.SpringBootHttpClient.DataModel.PostPipelineIdRules;
 
 public class DataRuleDefinitionJson {
 
