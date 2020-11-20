@@ -1,6 +1,5 @@
 package com.zdww.SpringBootHttpClient.HttpClient;
 
-import com.alibaba.fastjson.JSON;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
