@@ -24,12 +24,6 @@
 //    public String PostPipelinesaddLabels(@RequestBody AddLabelsRequestJson addLabelsRequestJson) throws Exception {
 //        String url = Schema_Host_Port_Path + "/v1/pipelines/addLabels";
 //
-//        //AddLabelsRequestJson addLabelsRequestJson = new AddLabelsRequestJson();
-//        //addLabelsRequestJson.setLabels(new String[]{"HttpClient"});
-//        //System.out.println(JSON.toJSONString(addLabelsRequestJson.getLabels()));
-//        //addLabelsRequestJson.getLabels();
-//        //addLabelsRequestJson.setPipelineNames(new String[]{"HttpClient_TESTAPI"});
-//        //addLabelsRequestJson.getPipelineNames();
 //        System.out.println(addLabelsRequestJson);
 //        String body  = JSON.toJSONString(addLabelsRequestJson);
 //        System.out.println(body);

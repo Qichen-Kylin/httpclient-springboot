@@ -1,5 +1,6 @@
 package com.zdww.SpringBootHttpClient.HttpClient;
 
+import com.alibaba.fastjson.JSON;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
@@ -184,19 +185,19 @@ public class HttpAPIService {
         HttpPost httpPost = new HttpPost(uriBuilder.build());
         httpPost.addHeader("Authorization", "Basic " + Base64.getUrlEncoder().encodeToString(("admin" + ":" + "admin").getBytes()));
         httpPost.addHeader("X-Requested-By","sdc");
-        //httpPost.addHeader("Content-Type","application/json");
+
         // 设置请求体
-        httpPost.setEntity(new StringEntity(body));
-        //httpPost.setEntity(new StringEntity(body,"UTF-8"));
         httpPost.setHeader("Content-Type", "application/json");
         httpPost.setHeader("charset","utf8");
+        //httpPost.setEntity(new StringEntity(body,"UTF-8"));
+        httpPost.setEntity(new StringEntity(body));
+
 
         //获取request URL
         System.out.println("request URL：");
         System.out.println(httpPost.getURI());
         // 使用HttpClient发起请求，返回response
         CloseableHttpResponse response = null;
-        //response.addHeader("Content-Type","application/json;UTF-8");
         try {
             response = httpClient.execute(httpPost);
         } catch (IOException e) {
@@ -212,20 +213,13 @@ public class HttpAPIService {
         HttpEntity entity = response.getEntity();
         // 解析数据封装HttpResult
         if (entity != null) {
-//            System.out.println(response.getStatusLine().getStatusCode());
-//            String responseContent = EntityUtils.toString(entity,"UTF-8");
-//            System.out.println(responseContent);
-            // System.out.println("response code:");
             httpResult.setCode(response.getStatusLine().getStatusCode());
-            // System.out.println("response body:");
             System.out.println(response.getEntity().getContentType());
             httpResult.setBody(EntityUtils.toString(response.getEntity(),"UTF-8"));
         } else {
             httpResult.setCode(response.getStatusLine().getStatusCode());
             httpResult.setBody("Post失败！");
         }
-//        response.close();
-//        httpClient.close();
         // 返回结果
         return httpResult;
     }
@@ -237,21 +231,16 @@ public class HttpAPIService {
      * @param [url, body, map]
      * @return com.example.HttpClient.HttpResult
      */
-    public HttpResult doPostParameterAndBody(String url, String body ,Map<String,Object> map) throws Exception {
+    public HttpResult doPostParameterAndBody(String url, String body, Map<String, Object> map) throws Exception {
         // 声明URIBuilder
         URIBuilder uriBuilder = new URIBuilder(url);
         // 声明httpPost请求
         HttpPost httpPost = new HttpPost(uriBuilder.build());
         httpPost.addHeader("Authorization", "Basic " + Base64.getUrlEncoder().encodeToString(("admin" + ":" + "admin").getBytes()));
         httpPost.addHeader("X-Requested-By","sdc");
-        //httpPost.addHeader("Content-Type","application/json");
-        // 设置请求体
-        httpPost.setEntity(new StringEntity(body));
-        //httpPost.setEntity(new StringEntity(body,"UTF-8"));
-        httpPost.setHeader("Content-Type", "application/json;charset=utf8");
 
         // 判断map不为空
-        if (map != null) {
+        if (map != null){
             // 声明存放参数的List集合
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             // 遍历map，设置参数到list中
@@ -260,13 +249,18 @@ public class HttpAPIService {
                     params.add(new BasicNameValuePair(entry.getKey(), entry.getValue().toString()));
                 }
             }
-
             // 创建form表单对象
             UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(params,"UTF-8");
 
             // 把表单对象设置到httpPost中
             httpPost.setEntity(formEntity);
         }
+
+        // 设置body请求体
+        //httpPost.setEntity(new StringEntity(body));
+        httpPost.setHeader("Content-Type", "application/json");
+        httpPost.setEntity(new StringEntity(body,"UTF-8"));
+
         //获取request URL
         System.out.println("request URL：");
         System.out.println(httpPost.getURI());
@@ -284,16 +278,11 @@ public class HttpAPIService {
 
         // 解析response封装返回对象httpResult
         HttpResult httpResult = new HttpResult();
-
         HttpEntity entity = response.getEntity();
+
         // 解析数据封装HttpResult
         if (entity != null) {
-//            System.out.println(response.getStatusLine().getStatusCode());
-//            String responseContent = EntityUtils.toString(entity,"UTF-8");
-//            System.out.println(responseContent);
-            // System.out.println("response code:");
             httpResult.setCode(response.getStatusLine().getStatusCode());
-            // System.out.println("response body:");
             System.out.println(response.getEntity().getContentType());
             httpResult.setBody(EntityUtils.toString(response.getEntity(),"UTF-8"));
         } else {
