@@ -1,6 +1,7 @@
 package com.zdww.SpringBootHttpClient.APIController;
 
 import com.alibaba.fastjson.JSON;
+import com.zdww.SpringBootHttpClient.DataModel.AddLabelsRequestJson;
 import com.zdww.SpringBootHttpClient.DataModel.PostPipelineId.PipelineConfigurationJson;
 import com.zdww.SpringBootHttpClient.DataModel.PostPipelineIdRules.RuleDefinitionsJson;
 import com.zdww.SpringBootHttpClient.HttpClient.HttpAPIService;
@@ -87,6 +88,27 @@ public class Store {
         String body  = JSON.toJSONString(pipelineConfigurationJson);
         System.out.println(body);
         HttpResult httpResult = httpAPIService.doPostParameterAndBody(url,body,map);
+        System.out.println(httpResult.getCode());
+        System.out.println(httpResult.getBody());
+        return httpResult.getBody();
+    }
+    @RequestMapping("/delete/v1/pipeline/{pipelineId}")
+    //按名称删除管道配置
+    public String DeletePipelineId(@PathVariable("pipelineId") String pipelineId,@RequestParam Map<String, Object> map)throws Exception {
+        String url = Schema_Host_Port_Path + "/v1/pipeline/"+ pipelineId;
+        HttpResult httpResult = httpAPIService.doDelete(url,map);
+        System.out.println(httpResult.getCode());
+        System.out.println(httpResult.getBody());
+        return httpResult.getBody();
+    }
+
+    @RequestMapping("/post/v1/pipelines/addLabels")
+    //将标签添加到多个管道
+    public String PostPipelinesaddLabels(@RequestBody AddLabelsRequestJson addLabelsRequestJson) throws Exception {
+        String url = Schema_Host_Port_Path + "/v1/pipelines/addLabels";
+        String body = JSON.toJSONString(addLabelsRequestJson);
+
+        HttpResult httpResult = httpAPIService.doPostbody(url, body);
         System.out.println(httpResult.getCode());
         System.out.println(httpResult.getBody());
         return httpResult.getBody();
