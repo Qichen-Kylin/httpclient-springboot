@@ -22,10 +22,17 @@ public class UserManagement {
     private HttpAPIService httpAPIService;
     private static final String Schema_Host_Port_Path = "http://worker3:18630/rest";
 
-    @RequestMapping("/post/v1/usermanagement/users/{id}/resetPassword")
-    public String PostResetPassword(@PathVariable("id") String id,@RequestParam Map<String, Object> map) throws Exception {
+    @RequestMapping("/v1/usermanagement/users/{id}/resetPassword")
+    public String PostResetPassword(@PathVariable("id") String id,@RequestParam Map<String, Object> map) {
         String url = Schema_Host_Port_Path + "/v1/usermanagement/users/" + id + "/resetPassword";
-        HttpResult httpResult = httpAPIService.doPost(url,map);
+
+        HttpResult httpResult = null;
+        try {
+            httpResult = httpAPIService.doPost(url,map);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         System.out.println(httpResult.getCode());
         System.out.println(httpResult.getBody());
         return httpResult.getBody();
@@ -78,4 +85,5 @@ public class UserManagement {
         System.out.println(httpResult.getBody());
         return httpResult.getBody();
     }
+
 }

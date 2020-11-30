@@ -73,7 +73,6 @@ public class HttpClient {
     public CloseableHttpClient getCloseableHttpClient(@Qualifier("httpClientBuilder") HttpClientBuilder httpClientBuilder){
         return httpClientBuilder.build();
     }
-
     /**
      * Builder是RequestConfig的一个内部类
      * 通过RequestConfig的custom方法来获取到一个Builder对象

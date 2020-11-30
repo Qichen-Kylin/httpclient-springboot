@@ -36,8 +36,8 @@ public class Activation {
 
     //@PostMapping("/post/v1/activation")
     //@RequestMapping(value = "/post/v1/activation" , method = RequestMethod.POST , produces = "application/json;charset=UTF-8")
-    @RequestMapping("/post/v1/activation")
-    public String PostActivation() throws Exception {
+    //@RequestMapping("/post/v1/activation")
+    /*public String PostActivation() throws Exception {
         String url = "http://worker3:18630/rest/v1/activation";
         Map<String, Object> map = new HashMap<String, Object>();
         //map.put("body", "");
@@ -45,5 +45,21 @@ public class Activation {
         System.out.println(httpResult.getCode());
         System.out.println(httpResult.getBody());
         return httpResult.getBody();
+    }*/
+
+    @RequestMapping("/post/v1/activation")
+    public String PostActivation(Map<String,Object> map){
+        String url = "http://worker3:18630/rest/v1/activation";
+        try {
+            HttpResult httpResult = httpAPIService.doPost(url,map);
+            String body = httpResult.getBody();
+            System.out.println(body);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
     }
+
 }

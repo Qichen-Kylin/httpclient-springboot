@@ -117,10 +117,9 @@ public class HttpAPIService {
         URIBuilder uriBuilder = new URIBuilder(url);
         // 声明httpPost请求
         HttpPost httpPost = new HttpPost(uriBuilder.build());
-        httpPost.addHeader("Authorization", "Basic " + Base64.getUrlEncoder().encodeToString(("admin" + ":" + "admin").getBytes()));
+        httpPost.addHeader("Authorization", "Basic" + Base64.getUrlEncoder().encodeToString(("admin" + ":" + "admin").getBytes()));
         httpPost.addHeader("X-Requested-By","sdc");
         httpPost.addHeader("Content-Type","application/json");
-
         // 判断map不为空
         if (map != null) {
             // 声明存放参数的List集合
@@ -131,7 +130,6 @@ public class HttpAPIService {
                     params.add(new BasicNameValuePair(entry.getKey(), entry.getValue().toString()));
                 }
             }
-
             // 创建form表单对象
             UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(params,"UTF-8");
 
@@ -153,7 +151,6 @@ public class HttpAPIService {
             httpResult.setBody("请求失败");
             return httpResult;
         }
-
         // 解析response封装返回对象httpResult
         HttpResult httpResult = new HttpResult();
         // 解析数据封装HttpResult
